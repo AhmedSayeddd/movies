@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_color.dart';
+import 'package:movies/core/app_style.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: const Color(AppColor.black),
       body: Stack(
         children: [
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Image.asset("assets/images/logo.png")
+                Image.asset("assets/images/logo.png")
               ],
             ),
           ),
@@ -41,14 +43,11 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset("assets/images/route.png" , width: 180 , height: 76 ,),
-                   const SizedBox(height: 5),
-                  const Text(
+                  Image.asset("assets/images/route.png", width: 180, height: 76),
+                  const SizedBox(height: 5),
+                  Text(
                     'Supervised by Mohamed Nabil',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
+                    style: AppStyle.summarytext.copyWith(fontSize: 14),
                   ),
                 ],
               ),

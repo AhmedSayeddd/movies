@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_color.dart';
+import 'package:movies/core/app_style.dart';
 
 import 'login_screen.dart';
 
@@ -66,10 +68,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryYellow = Color(0xFFF6BD00);
-
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: const Color(AppColor.black),
       body: Stack(
         children: [
           PageView.builder(
@@ -112,21 +112,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Text(
                             _pages[index].title,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: AppStyle.titletext,
                           ),
                           if (_pages[index].description.isNotEmpty) ...[
                             const SizedBox(height: 16),
                             Text(
                               _pages[index].description,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
+                              style: AppStyle.summarytext,
                             ),
                           ],
                           const SizedBox(height: 32),
@@ -142,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryYellow,
+                              backgroundColor: const Color(AppColor.gold),
                               minimumSize: const Size(double.infinity, 56),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -150,9 +143,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             child: Text(
                               _pages[index].buttonText,
-                              style: const TextStyle(
-                                color: Color(0xFF121212),
-                                fontSize: 20,
+                              style: AppStyle.subtitletext.copyWith(
+                                color: const Color(AppColor.black),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -167,17 +159,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 );
                               },
                               style: OutlinedButton.styleFrom(
-                                side: const BorderSide(color: primaryYellow),
+                                side: const BorderSide(color: Color(AppColor.gold)),
                                 minimumSize: const Size(double.infinity, 56),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Back',
-                                style: TextStyle(
-                                  color: primaryYellow,
-                                  fontSize: 20,
+                                style: AppStyle.subtitletext.copyWith(
+                                  color: const Color(AppColor.gold),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
