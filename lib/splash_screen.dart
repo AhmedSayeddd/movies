@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-
+      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
     });
   }
 
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset("assets/images/route.png" , width: 180 , height: 76 ,),
-                   SizedBox(height: 5),
+                   const SizedBox(height: 5),
                   const Text(
                     'Supervised by Mohamed Nabil',
                     style: TextStyle(
