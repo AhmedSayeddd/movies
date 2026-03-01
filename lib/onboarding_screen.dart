@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_screen.dart';
+
 class OnboardingScreen extends StatefulWidget {
   static const String routeName = 'onboarding';
 
@@ -64,6 +66,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const Color primaryYellow = Color(0xFFF6BD00);
+
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
       body: Stack(
@@ -79,21 +83,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             itemBuilder: (context, index) {
               return Stack(
                 children: [
-                  // Background Image
                   SizedBox.expand(
                     child: Image.asset(
                       _pages[index].image,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Shadow Image Overlay
                   SizedBox.expand(
                     child: Image.asset(
                       _pages[index].shadowImage,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Content
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
@@ -129,7 +130,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ],
                           const SizedBox(height: 32),
-                          // Action Buttons
                           ElevatedButton(
                             onPressed: () {
                               if (_currentIndex < _pages.length - 1) {
@@ -138,10 +138,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   curve: Curves.easeInOut,
                                 );
                               } else {
+                                Navigator.pushReplacementNamed(context, LoginScreen.routeName);
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFBB3B),
+                              backgroundColor: primaryYellow,
                               minimumSize: const Size(double.infinity, 56),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -166,7 +167,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 );
                               },
                               style: OutlinedButton.styleFrom(
-                                side: const BorderSide(color: Color(0xFFFFBB3B)),
+                                side: const BorderSide(color: primaryYellow),
                                 minimumSize: const Size(double.infinity, 56),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
@@ -175,7 +176,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               child: const Text(
                                 'Back',
                                 style: TextStyle(
-                                  color: Color(0xFFFFBB3B),
+                                  color: primaryYellow,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
