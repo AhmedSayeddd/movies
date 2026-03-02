@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../core/app_assets.dart';
 import '../core/app_color.dart';
 import '../core/app_style.dart';
+import 'onboarding_screen.dart';
 
 class MovieOnboardingScreen extends StatelessWidget {
   const MovieOnboardingScreen({super.key});
@@ -49,7 +50,7 @@ class MovieOnboardingScreen extends StatelessWidget {
                     height: 56,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, 'OnboardingScreen');
+                        Navigator.pushNamed(context, OnboardingScreen.routeName);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(AppColor.gold),
@@ -59,11 +60,11 @@ class MovieOnboardingScreen extends StatelessWidget {
                         elevation: 0,
                       ),
                       child: Text(
-                        "Explore Now",
-                        style: AppStyle.subtitletext.copyWith(
-                         fontWeight: FontWeight.w600, color: Colors.black)),
-                      ),
+                          "Explore Now",
+                          style: AppStyle.subtitletext.copyWith(
+                              fontWeight: FontWeight.w600, color: Colors.black)),
                     ),
+                  ),
                 ],
               ),
             ),
