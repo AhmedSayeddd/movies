@@ -16,13 +16,12 @@ class AppAssets {
   static const String GamerProfile6 = 'assets/images/gamer7.png';
   static const String GamerProfile7 = 'assets/images/gamer8.png';
   static const String GamerProfile8 = 'assets/images/gamer9.png';
-  static const String email = 'assets/images/icons/email.svg';
-  static const String password = 'assets/images/icons/password.svg';
-  static const String phone = 'assets/images/icons/phone.svg';
-  static const String google = 'assets/images/icons/google.svg';
-  static const String egypt = 'assets/images/icons/EG.svg';
-  static const String usa = 'assets/images/icons/LR.svg';
-  static const String eyeOn = 'assets/images/icons/eyeOn.svg';
-  static const String eyeOff = 'assets/images/icons/eyeOff.svg';
-  static const String identity = 'assets/images/icons/Identification_.svg';
+  static const String email = 'assets/images/email.png';
+  static const String password = 'assets/images/password.png';
+  static const String phone = 'assets/images/phone.png';
+  static const String google = 'assets/images/google.png';
+  static const String egypt = 'assets/images/EG.png';
+  static const String usa = 'assets/images/US.png';
+  static const String route = 'assets/images/route.png';
+  static const String identity = 'assets/images/idnentity.png';
 }

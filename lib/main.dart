@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies/auth/login_screen.dart';
-import 'OnBording/first_onbording.dart';
-import 'auth/register_screen.dart';
+import 'package:movies/auth/forgetPassword_screen.dart';
+import 'package:movies/auth/register_screen.dart';
+import 'auth/login_screen.dart';
 import 'splash_screen.dart';
 import 'OnBording/onboarding_screen.dart';
+import 'OnBording/first_onbording.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,11 +21,11 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
-        MovieOnboardingScreen.routeName: (context) =>
-            const MovieOnboardingScreen(),
+        MovieOnboardingScreen.routeName: (context) => const MovieOnboardingScreen(),
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => const RegisterScreen(),
+        ForgetpasswordScreen.routeName: (context) => const ForgetpasswordScreen(),
       },
     );
   }

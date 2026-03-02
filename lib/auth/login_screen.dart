@@ -3,7 +3,10 @@ import 'package:movies/auth/register_screen.dart';
 import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../model/buildTextField.dart';
+import '../model/language_toggle.dart';
+import 'forgetPassword_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login';
@@ -15,8 +18,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _isObscured = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,21 +39,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-              _buildTextField(
+              const AppTextField(
                 hintText: 'Email',
-                prefixIcon: SvgPicture.asset(AppAssets.email),
+                prefixIcon: ImageIcon(
+                  AssetImage(AppAssets.email),
+                  size: 24,
+                  color: Color(AppColor.white),
+                ),
               ),
               const SizedBox(height: 20),
-              _buildTextField(
+              const AppTextField(
                 hintText: 'Password',
-                prefixIcon: SvgPicture.asset(AppAssets.password),
+                prefixIcon: ImageIcon(
+                  AssetImage(AppAssets.password),
+                  size: 24,
+                  color: Color(AppColor.white),
+                ),
                 isPassword: true,
               ),
               const SizedBox(height: 12),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, ForgetpasswordScreen.routeName);
+                  },
                   child: Text(
                     'Forget Password ?',
                     style: AppStyle.summarytext.copyWith(
@@ -100,20 +111,21 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 30),
               const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Divider(color: Color(AppColor.gold), thickness: 0.5),
-                  ),
+                  SizedBox(
+                      width: 91,
+                      child: Divider(color: Color(AppColor.gold), thickness: 0.5)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Text(
                       'OR',
                       style: TextStyle(color: Color(AppColor.gold)),
                     ),
                   ),
-                  Expanded(
-                    child: Divider(color: Color(AppColor.gold), thickness: 0.5),
-                  ),
+                  SizedBox(
+                      width: 91,
+                      child: Divider(color: Color(AppColor.gold), thickness: 0.5)),
                 ],
               ),
               const SizedBox(height: 30),
@@ -126,7 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                icon: SvgPicture.asset(AppAssets.google),
+                icon: const ImageIcon(
+                  AssetImage(AppAssets.google),
+                  size: 25,
+                ),
                 label: Text(
                   'Login With Google',
                   style: AppStyle.subtitletext.copyWith(
@@ -142,104 +157,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildTextField({
-    required String hintText,
-    required Widget prefixIcon,
-    bool isPassword = false,
-  }) {
-    return TextField(
-      obscureText: isPassword ? _isObscured : false,
-      style: AppStyle.summarytext,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: AppStyle.summarytext.copyWith(color: Colors.white70),
-        prefixIcon: prefixIcon,
-        suffixIcon: isPassword
-            ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                },
-                icon: Icon(
-                  _isObscured ? Icons.visibility_off : Icons.visibility,
-                  color: const Color(AppColor.white),
-                ),
-              )
-            : null,
-        filled: true,
-        fillColor: const Color(0xFF282A28),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-}
-
-class LanguageToggle extends StatefulWidget {
-  final Color activeColor;
-  const LanguageToggle({super.key, required this.activeColor});
-
-  @override
-  State<LanguageToggle> createState() => _LanguageToggleState();
-}
-
-class _LanguageToggleState extends State<LanguageToggle> {
-  bool isEnglish = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => isEnglish = !isEnglish),
-      child: Container(
-        width: 80,
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: widget.activeColor, width: 2),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            AnimatedAlign(
-              duration: const Duration(milliseconds: 300),
-              alignment: isEnglish
-                  ? Alignment.centerLeft
-                  : Alignment.centerRight,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: widget.activeColor,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildFlag('assets/images/US.png'),
-                _buildFlag('assets/images/EG.png'),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFlag(String path) {
-    return Image.asset(
-      path,
-      width: 24,
-      errorBuilder: (context, error, stackTrace) =>
-          const Icon(Icons.flag, size: 18, color: Colors.white),
     );
   }
 }
