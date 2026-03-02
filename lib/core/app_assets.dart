@@ -1,11 +1,11 @@
 class AppAssets {
   static const String logo = 'assets/images/logo.png';
-  static const String MoviesPosters = 'assets/images/MoviesPostersGroup.png';
-  static const String Acengers = 'assets/images/Avengers.png';
-  static const String OppenHeimer = 'assets/images/Oppenheimer.png';
-  static const String BadBoys = 'assets/images/BadBoys.png';
-  static const String DrString = 'assets/images/Drstrange.png';
-  static const String poster5 = 'assets/images/1917.png';
+  static const String MoviesPosters = 'assets/images/Group4.png';
+  static const String Acengers = 'assets/images/Group 6.png';
+  static const String OppenHeimer = 'assets/images/Group 5.png';
+  static const String BadBoys = 'assets/images/BadBoys1.png';
+  static const String Drstrange = 'assets/images/Drstrange1.png';
+  static const String poster5 = 'assets/images/1917_.png';
   static const String forgotPassword = 'assets/images/Forgotpassword-bro.png';
   static const String GamerProfile = 'assets/images/gamer1.png';
   static const String GamerProfile1 = 'assets/images/gamer2.png';
