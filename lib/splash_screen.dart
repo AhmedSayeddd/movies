@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
-import 'onboarding_screen.dart';
+import 'OnBording/first_onbording.dart';
+import 'OnBording/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+      Navigator.pushReplacementNamed(context, MovieOnboardingScreen.routeName);
     });
   }
 
@@ -31,9 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/logo.png")
-              ],
+              children: [Image.asset("assets/images/logo.png")],
             ),
           ),
           Align(
@@ -43,7 +42,11 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset("assets/images/route.png", width: 180, height: 76),
+                  Image.asset(
+                    "assets/images/route.png",
+                    width: 180,
+                    height: 76,
+                  ),
                   const SizedBox(height: 5),
                   Text(
                     'Supervised by Mohamed Nabil',

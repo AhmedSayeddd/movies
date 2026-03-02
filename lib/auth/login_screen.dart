@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/register_screen.dart';
+import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login';
@@ -35,11 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-              _buildTextField(hintText: 'Email', prefixIcon: Icons.email),
+              _buildTextField(
+                hintText: 'Email',
+                prefixIcon: SvgPicture.asset(AppAssets.email),
+              ),
               const SizedBox(height: 20),
               _buildTextField(
                 hintText: 'Password',
-                prefixIcon: Icons.lock,
+                prefixIcon: SvgPicture.asset(AppAssets.password),
                 isPassword: true,
               ),
               const SizedBox(height: 12),
@@ -78,8 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don't Have Account: ? ", style: AppStyle.summarytext),
-                  GestureDetector(
-                    onTap: () {},
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RegisterScreen.routeName);
+                    },
                     child: Text(
                       'Create One',
                       style: AppStyle.summarytext.copyWith(
@@ -94,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Row(
                 children: [
                   Expanded(
-                    child: Divider(color: Color(AppColor.gold), thickness: 1),
+                    child: Divider(color: Color(AppColor.gold), thickness: 0.5),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
@@ -104,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Expanded(
-                    child: Divider(color: Color(AppColor.gold), thickness: 1),
+                    child: Divider(color: Color(AppColor.gold), thickness: 0.5),
                   ),
                 ],
               ),
@@ -118,11 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                icon: const Icon(
-                  Icons.g_mobiledata,
-                  color: Color(AppColor.black),
-                  size: 30,
-                ),
+                icon: SvgPicture.asset(AppAssets.google),
                 label: Text(
                   'Login With Google',
                   style: AppStyle.subtitletext.copyWith(
@@ -143,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildTextField({
     required String hintText,
-    required IconData prefixIcon,
+    required Widget prefixIcon,
     bool isPassword = false,
   }) {
     return TextField(
@@ -152,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: AppStyle.summarytext.copyWith(color: Colors.white70),
-        prefixIcon: Icon(prefixIcon, color: const Color(AppColor.white)),
+        prefixIcon: prefixIcon,
         suffixIcon: isPassword
             ? IconButton(
                 onPressed: () {
