@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
 import 'OnBording/first_onbording.dart';
-import 'OnBording/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
