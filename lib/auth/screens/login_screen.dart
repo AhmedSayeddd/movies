@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final AuthService _authService = AuthService(); // 👈 instantiate AuthService
+  final AuthService _authService = AuthService(); 
 
   bool _isGoogleLoading = false;
 
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 30),
 
-                // 👇 Google Sign-In button with loading state
+             
                 ElevatedButton.icon(
                   onPressed: _isGoogleLoading ? null : _loginWithGoogle,
                   style: ElevatedButton.styleFrom(

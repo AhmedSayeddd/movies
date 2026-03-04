@@ -104,7 +104,6 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
     );
   }
 
-  /// Shown before sending — the email input form
   Widget _buildFormState() {
     return Form(
       key: _formKey,
@@ -173,7 +172,6 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
     );
   }
 
-  /// Shown after email is sent successfully
   Widget _buildSuccessState() {
     return Column(
       children: [
@@ -216,7 +214,6 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
         ),
         const SizedBox(height: 16),
 
-        // Back to login
         SizedBox(
           width: double.infinity,
           height: 55,
