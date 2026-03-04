@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
-import 'OnBording/first_onbording.dart';
+import 'package:movies/OnBording/first_onbording.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
@@ -31,7 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Image.asset("assets/images/logo.png")],
+              children: [
+                Image.asset(AppAssets.logo, height: 150),
+              ],
             ),
           ),
           Align(
@@ -42,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    "assets/images/route.png",
+                    AppAssets.route,
                     width: 180,
                     height: 76,
                   ),

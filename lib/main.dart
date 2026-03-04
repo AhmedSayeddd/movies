@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:movies/auth/login_screen.dart';
-import 'OnBording/first_onbording.dart';
-import 'auth/register_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:movies/auth/screens/forgetPassword_screen.dart';
+import 'package:movies/auth/screens/register_screen.dart';
+import 'auth/screens/login_screen.dart';
 import 'splash_screen.dart';
 import 'OnBording/onboarding_screen.dart';
+import 'OnBording/first_onbording.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -20,11 +29,11 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
-        MovieOnboardingScreen.routeName: (context) =>
-            const MovieOnboardingScreen(),
+        MovieOnboardingScreen.routeName: (context) => const MovieOnboardingScreen(),
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => const RegisterScreen(),
+        ForgetpasswordScreen.routeName: (context) => const ForgetpasswordScreen(),
       },
     );
   }
