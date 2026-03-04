@@ -7,6 +7,7 @@ class AppTextField extends StatefulWidget {
   final Widget prefixIcon;
   final bool isPassword;
   final TextEditingController? controller;
+ final FormFieldValidator<String>? validator;
 
   const AppTextField({
     super.key,
@@ -14,6 +15,7 @@ class AppTextField extends StatefulWidget {
     required this.prefixIcon,
     this.isPassword = false,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -25,10 +27,11 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPassword ? _isObscured : false,
       style: AppStyle.summarytext.copyWith(color: Colors.white),
+       validator: widget.validator,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: AppStyle.summarytext.copyWith(color: Colors.white70),
