@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movies/auth/screens/forgetPassword_screen.dart';
 import 'package:movies/auth/screens/register_screen.dart';
+import 'package:movies/home/home_screen.dart';
 import 'auth/screens/login_screen.dart';
 import 'auth/firebase_options.dart';
 import 'splash_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => const RegisterScreen(),
         ForgetpasswordScreen.routeName: (context) => const ForgetpasswordScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
     );
   }

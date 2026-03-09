@@ -8,6 +8,7 @@ class AppAssets {
   static const String poster5 = 'assets/images/1917_.png';
   static const String forgotPassword = 'assets/images/Forgotpassword-bro.png';
   static const String GamerProfile = 'assets/images/gamer1.png';
+  static const String homeBG = 'assets/images/HomeBG.png';
   static const String GamerProfile1 = 'assets/images/gamer2.png';
   static const String GamerProfile2 = 'assets/images/gamer3.png';
   static const String GamerProfile3 = 'assets/images/gamer4.png';
