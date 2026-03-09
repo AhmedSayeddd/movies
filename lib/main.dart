@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:movies/auth/screens/forgetPassword_screen.dart';
 import 'package:movies/auth/screens/register_screen.dart';
 import 'auth/screens/login_screen.dart';
+import 'auth/firebase_options.dart';
 import 'splash_screen.dart';
 import 'OnBording/onboarding_screen.dart';
 import 'OnBording/first_onbording.dart';

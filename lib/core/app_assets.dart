@@ -24,4 +24,7 @@ class AppAssets {
   static const String usa = 'assets/images/US.png';
   static const String route = 'assets/images/route.png';
   static const String identity = 'assets/images/idnentity.png';
+  static const String folder = 'assets/images/Folder.png';
+  static const String watchlist = 'assets/images/watchlist.png';
+  static const String emptyprofile = 'assets/images/Empty.png';
 }
