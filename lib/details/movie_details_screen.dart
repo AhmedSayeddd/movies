@@ -12,10 +12,26 @@ import 'widgets/poster_header.dart';
 import 'widgets/screenshot_list.dart';
 import 'widgets/similar_movies_section.dart';
 
-class MovieDetailsScreen extends StatelessWidget {
+class MovieDetailsScreen extends StatefulWidget {
   static const String routeName = '/movieDetails';
 
   const MovieDetailsScreen({super.key});
+
+  @override
+  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
+}
+
+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final passedMovie = ModalRoute.of(context)?.settings.arguments as MovieModel?;
+      if (passedMovie != null) {
+        context.read<MovieCubit>().fetchMovieDetails(passedMovie.id);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

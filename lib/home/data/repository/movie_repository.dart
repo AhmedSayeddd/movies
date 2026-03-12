@@ -11,18 +11,20 @@ class MovieRepository {
     required this.remoteDataSource,
     required this.localDataSource,
   });
-  Future<List<MovieModel>> getMovies() async {
+  Future<List<MovieModel>> getMovies({String? genre}) async {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult != ConnectivityResult.none) {
       try {
-        final movies = await remoteDataSource.fetchMovies();
-        await localDataSource.saveMovies(movies);
+        final movies = await remoteDataSource.fetchMovies(genre: genre);
+        if (genre == null) {
+          await localDataSource.saveMovies(movies);
+        }
         return movies;
       } catch (e) {
-        return await localDataSource.getCachedMovies();
+        return genre == null ? await localDataSource.getCachedMovies() : [];
       }
     } else {
-      return await localDataSource.getCachedMovies();
+      return genre == null ? await localDataSource.getCachedMovies() : [];
     }
   }
   Future<MovieDetailsModel?> getMovieDetails(int id) async {
