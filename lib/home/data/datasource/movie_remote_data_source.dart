@@ -5,8 +5,8 @@ import 'package:movies/home/models/movie_model.dart';
 class MovieRemoteDataSource {
   final ApiService apiService;
   MovieRemoteDataSource(this.apiService);
-  Future<List<MovieModel>> fetchMovies() async {
-    final response = await apiService.getMovies();
+  Future<List<MovieModel>> fetchMovies({String? genre}) async {
+    final response = await apiService.getMovies(genre: genre);
     final List data = response['data']['movies'] ?? [];
     return data.map((m) => MovieModel.fromJson(m)).toList();
   }

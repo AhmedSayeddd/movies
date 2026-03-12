@@ -1,12 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../core/widgets/custom_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/home/cubit/movie_cubit.dart';
 import 'package:movies/home/cubit/movie_state.dart';
 import 'package:movies/home/models/movie_model.dart';
-import 'widgets/bottom_nav_bar.dart';
 import 'widgets/category_section.dart';
 import 'widgets/movie_carousel.dart';
 
@@ -18,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-  int _selectedNavIndex = 0;
   int _focusedMovieIndex = 1;
   String _currentBg = '';
   String _nextBg = '';
@@ -29,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    context.read<MovieCubit>().fetchMovies();
     _bgAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -61,36 +59,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         });
       });
     }
-  }
-
-  void _onNavTap(int index) {
-    if (_selectedNavIndex == index) return;
-    Widget page;
-    switch (index) {
-      case 0:
-        page = const HomeScreen();
-        break;
-      case 1:
-        page = const _PlaceholderScreen(title: 'Search', index: 1);
-        break;
-      case 2:
-        page = const _PlaceholderScreen(title: 'Movies', index: 2);
-        break;
-      case 3:
-        page = const _PlaceholderScreen(title: 'Profile', index: 3);
-        break;
-      default:
-        page = const HomeScreen();
-    }
-    Navigator.pushReplacement(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => page,
-        transitionDuration: const Duration(milliseconds: 260),
-        transitionsBuilder: (_, anim, __, child) =>
-            FadeTransition(opacity: anim, child: child),
-      ),
-    );
   }
 
   @override
@@ -208,15 +176,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
               ),
-              Positioned(
-                left: 16,
-                right: 16,
-                bottom: 16,
-                child: BottomNavBar(
-                  currentIndex: _selectedNavIndex,
-                  onTap: _onNavTap,
-                ),
-              ),
             ],
           ),
         );
@@ -277,88 +236,6 @@ class _AnimatedBackground extends StatelessWidget {
                 ],
                 stops: const [0.0, 0.18, 0.44, 0.76, 1.0],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PlaceholderScreen extends StatelessWidget {
-  final String title;
-  final int index;
-  const _PlaceholderScreen({required this.title, required this.index});
-  void _onNavTap(BuildContext context, int i) {
-    Widget page;
-    switch (i) {
-      case 0:
-        page = const HomeScreen();
-        break;
-      case 1:
-        page = const _PlaceholderScreen(title: 'Search', index: 1);
-        break;
-      case 2:
-        page = const _PlaceholderScreen(title: 'Movies', index: 2);
-        break;
-      case 3:
-        page = const _PlaceholderScreen(title: 'Profile', index: 3);
-        break;
-      default:
-        page = const HomeScreen();
-    }
-    Navigator.pushReplacement(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => page,
-        transitionDuration: const Duration(milliseconds: 260),
-        transitionsBuilder: (_, anim, __, child) =>
-            FadeTransition(opacity: anim, child: child),
-      ),
-    );
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF111111),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.movie_filter_rounded,
-                  color: Color(0xFFFFBB3B),
-                  size: 52,
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  title,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'Coming soon',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white.withOpacity(0.5),
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            left: 16,
-            right: 16,
-            bottom: 16,
-            child: BottomNavBar(
-              currentIndex: index,
-              onTap: (i) => _onNavTap(context, i),
             ),
           ),
         ],
