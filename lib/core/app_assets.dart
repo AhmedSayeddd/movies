@@ -28,4 +28,8 @@ class AppAssets {
   static const String folder = 'assets/images/Folder.png';
   static const String watchlist = 'assets/images/watchlist.png';
   static const String emptyprofile = 'assets/images/Empty.png';
+  static const String favorite = 'assets/images/fav.png';
+  static const String eye = 'assets/images/time.png';
+  static const String star = 'assets/images/star.png';
+  static const String play = 'assets/images/play.png';
 }
