@@ -5,7 +5,7 @@ import 'package:movies/auth/screens/register_screen.dart';
 import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
-import 'package:movies/home/home_screen.dart';
+import 'package:movies/main_wrapper.dart';
 import '../../model/buildTextField.dart';
 import '../../model/language_toggle.dart';
 import 'forgetPassword_screen.dart';
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text.trim(),
         );
         if (mounted) {
-           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+           Navigator.pushReplacementNamed(context, MainWrapper.routeName);
         }
       } catch (e) {
         if (mounted) {
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final user = await _authService.signInWithGoogle();
       if (user != null && mounted) {
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        Navigator.pushReplacementNamed(context, MainWrapper.routeName);
       }
     } on AuthException catch (e) {
       if (mounted) {
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text("Don't Have Account: ? ", style: AppStyle.summarytext),
                     TextButton(
-                      onPressed: () {
+                       onPressed: () {
                         Navigator.pushNamed(context, RegisterScreen.routeName);
                       },
                       child: Text(

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/home/cubit/movie_cubit.dart';
 import 'package:movies/home/cubit/movie_state.dart';
 import 'package:movies/home/models/movie_model.dart';
+import 'package:movies/profile/cubit/profile_cubit.dart';
+import 'package:movies/details/movie_details_screen.dart';
 import 'widgets/category_section.dart';
 import 'widgets/movie_carousel.dart';
 
@@ -146,11 +148,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       MovieCarousel(
                         movies: featured,
                         onMovieChanged: (index) => _onMovieChanged(index, featured),
-                        onMovieTap: (movie) => Navigator.pushNamed(
-                          context,
-                          '/movieDetails',
-                          arguments: movie,
-                        ),
+                        onMovieTap: (movie) {
+                          context.read<ProfileCubit>().addToHistory(movie);
+                          Navigator.pushNamed(
+                            context,
+                            MovieDetailsScreen.routeName,
+                            arguments: movie,
+                          ).then((_) {
+                            // Reload when returning from details
+                            context.read<MovieCubit>().fetchMovies();
+                          });
+                        },
                       ),
                       const SizedBox(height: 4),
                       Center(
@@ -165,11 +173,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         title: 'Action',
                         movies: action,
                         onSeeMore: () {},
-                        onMovieTap: (movie) => Navigator.pushNamed(
-                          context,
-                          '/movieDetails',
-                          arguments: movie,
-                        ),
+                        onMovieTap: (movie) {
+                          context.read<ProfileCubit>().addToHistory(movie);
+                          Navigator.pushNamed(
+                            context,
+                            MovieDetailsScreen.routeName,
+                            arguments: movie,
+                          ).then((_) {
+                            context.read<MovieCubit>().fetchMovies();
+                          });
+                        },
                       ),
                       const SizedBox(height: 22),
                     ],

@@ -4,6 +4,10 @@ import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
 import 'package:movies/OnBording/first_onbording.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movies/core/cache/cache_helper.dart';
+import 'package:movies/auth/screens/login_screen.dart';
+import 'package:movies/main_wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
@@ -18,9 +22,26 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, MovieOnboardingScreen.routeName);
-    });
+    _handleNavigation();
+  }
+
+  Future<void> _handleNavigation() async {
+    await Future.delayed(const Duration(seconds: 2));
+    
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      if (mounted) Navigator.pushReplacementNamed(context, MainWrapper.routeName);
+      return;
+    }
+
+    final bool onboardingSeen = await CacheHelper.getData('onboarding_seen') ?? false;
+    if (mounted) {
+      if (onboardingSeen) {
+        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+      } else {
+        Navigator.pushReplacementNamed(context, MovieOnboardingScreen.routeName);
+      }
+    }
   }
 
   @override
