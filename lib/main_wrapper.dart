@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home/home_screen.dart';
 import 'explore/explore_screen.dart';
+import 'search/search_screen.dart';
 import 'home/widgets/bottom_nav_bar.dart';
 
 class MainWrapper extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MainWrapperState extends State<MainWrapper> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const _PlaceholderScreen(title: 'Search', index: 1),
+    const SearchScreen(),
     const ExploreScreen(),
     const _PlaceholderScreen(title: 'Profile', index: 3),
   ];

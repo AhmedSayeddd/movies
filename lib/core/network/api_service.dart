@@ -9,13 +9,16 @@ class ApiService {
           receiveTimeout: const Duration(seconds: 15),
           connectTimeout: const Duration(seconds: 15),
         ));
-  Future<Map<String, dynamic>> getMovies({int limit = 20, int page = 1, String? genre}) async {
+  Future<Map<String, dynamic>> getMovies({int limit = 20, int page = 1, String? genre, String? query}) async {
     final Map<String, dynamic> queryParameters = {
       'limit': limit,
       'page': page,
     };
     if (genre != null && genre.isNotEmpty) {
       queryParameters['genre'] = genre;
+    }
+    if (query != null && query.isNotEmpty) {
+      queryParameters['query_term'] = query;
     }
     final response = await _dio.get('list_movies.json', queryParameters: queryParameters);
     return response.data;
