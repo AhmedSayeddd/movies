@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/profile/cubit/profile_cubit.dart';
+import 'package:movies/details/movie_details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../home/widgets/category_movie_card.dart';
 import 'cubit/explore_cubit.dart';
@@ -136,9 +138,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     );
                   }
                   return GridView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 10,
+                      bottom: 110,
                     ),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -151,11 +155,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     itemBuilder: (context, index) {
                       return CategoryMovieCard(
                         movie: state.movies[index],
-                        onTap: () {
+                        onMovieTap: (movie) {
+                          context.read<ProfileCubit>().addToHistory(movie);
                           Navigator.pushNamed(
                             context,
-                            '/movieDetails',
-                            arguments: state.movies[index],
+                            MovieDetailsScreen.routeName,
+                            arguments: movie,
                           );
                         },
                       );

@@ -3,9 +3,22 @@ import 'package:movies/home/models/movie_model.dart';
 
 class CacheHelper {
   static const String movieBox = 'movie_box';
+  static const String settingsBox = 'settings_box';
+
   static Future<void> init() async {
     await Hive.initFlutter();
   }
+
+  static Future<void> saveData(String key, dynamic value) async {
+    var box = await Hive.openBox(settingsBox);
+    await box.put(key, value);
+  }
+
+  static Future<dynamic> getData(String key) async {
+    var box = await Hive.openBox(settingsBox);
+    return box.get(key);
+  }
+
   static Future<void> cacheMovies(List<MovieModel> movies) async {
     var box = await Hive.openBox(movieBox);
     final data = movies.map((m) => m.toJson()).toList();

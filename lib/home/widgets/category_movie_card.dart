@@ -6,18 +6,18 @@ import 'rating_badge.dart';
 /// A smaller poster card used in the category horizontal list.
 class CategoryMovieCard extends StatelessWidget {
   final MovieModel movie;
-  final VoidCallback? onTap;
+  final void Function(MovieModel)? onMovieTap;
 
   const CategoryMovieCard({
     super.key,
     required this.movie,
-    this.onTap,
+    this.onMovieTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => onMovieTap?.call(movie),
       child: Container(
         width: 110,
         height: 164,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
+import '../core/cache/cache_helper.dart';
 import '../auth/screens/login_screen.dart';
 import '../core/app_assets.dart';
 
@@ -112,17 +113,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ],
                           const SizedBox(height: 32),
                           ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_currentIndex < _pages.length - 1) {
                                 _pageController.nextPage(
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeInOut,
                                 );
                               } else {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  LoginScreen.routeName,
-                                );
+                                await CacheHelper.saveData('onboarding_seen', true);
+                                if (mounted) {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    LoginScreen.routeName,
+                                  );
+                                }
                               }
                             },
                             style: ElevatedButton.styleFrom(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/profile/cubit/profile_cubit.dart';
+import 'package:movies/profile/cubit/profile_state.dart';
 import 'package:movies/home/cubit/movie_cubit.dart';
 import 'package:movies/home/cubit/movie_state.dart';
 import 'package:movies/home/models/movie_model.dart';
@@ -26,7 +28,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final passedMovie = ModalRoute.of(context)?.settings.arguments as MovieModel?;
+      final passedMovie =
+          ModalRoute.of(context)?.settings.arguments as MovieModel?;
       if (passedMovie != null) {
         context.read<MovieCubit>().fetchMovieDetails(passedMovie.id);
       }
@@ -105,22 +108,42 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     Positioned(
                       top: MediaQuery.of(context).padding.top + 8,
                       right: 10,
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.45),
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: const Icon(
-                            Icons.bookmark_border_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          onPressed: () {},
-                        ),
+                      child: BlocBuilder<ProfileCubit, ProfileState>(
+                        builder: (context, profileState) {
+                          bool isInWatchlist = false;
+                          if (profileState is ProfileLoaded) {
+                            isInWatchlist = profileState.user.watchlist.any(
+                              (m) => m.id == (passedMovie?.id ?? 0),
+                            );
+                          }
+                          return Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.45),
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              icon: Icon(
+                                isInWatchlist
+                                    ? Icons.bookmark_rounded
+                                    : Icons.bookmark_border_rounded,
+                                color: isInWatchlist
+                                    ? const Color(0xFFFFBB3B)
+                                    : Colors.white,
+                                size: 20,
+                              ),
+                              onPressed: () {
+                                if (passedMovie != null) {
+                                  context.read<ProfileCubit>().toggleWatchlist(
+                                    passedMovie,
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -130,14 +153,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   const Padding(
                     padding: EdgeInsets.only(top: 80),
                     child: Center(
-                      child: CircularProgressIndicator(color: Color(0xFFFFBB3B)),
+                      child: CircularProgressIndicator(
+                        color: Color(0xFFFFBB3B),
+                      ),
                     ),
                   )
                 else if (isError)
                   Padding(
                     padding: const EdgeInsets.only(top: 80),
                     child: Center(
-                      child: Text(errorMsg, style: const TextStyle(color: Colors.white)),
+                      child: Text(
+                        errorMsg,
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ),
                   )
                 else if (details != null) ...[

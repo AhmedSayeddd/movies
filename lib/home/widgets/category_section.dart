@@ -78,7 +78,7 @@ class CategorySection extends StatelessWidget {
             itemBuilder: (context, index) {
               return CategoryMovieCard(
                 movie: movies[index],
-                onTap: () => onMovieTap?.call(movies[index]),
+                onMovieTap: (movie) => onMovieTap?.call(movie),
               );
             },
           ),
