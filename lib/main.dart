@@ -9,6 +9,7 @@ import 'package:movies/home/data/datasource/movie_local_data_source.dart';
 import 'package:movies/home/data/datasource/movie_remote_data_source.dart';
 import 'package:movies/home/data/repository/movie_repository.dart';
 import 'package:movies/home/home_screen.dart';
+import 'package:movies/search/cubit/search_cubit.dart';
 import 'package:movies/main_wrapper.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ class MoviesApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => MovieCubit(movieRepository)),
           BlocProvider(create: (context) => ExploreCubit(movieRepository)),
+          BlocProvider(create: (context) => SearchCubit(movieRepository)),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
