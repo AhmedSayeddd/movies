@@ -5,6 +5,7 @@ import 'package:movies/auth/screens/register_screen.dart';
 import 'package:movies/core/app_assets.dart';
 import 'package:movies/core/app_color.dart';
 import 'package:movies/core/app_style.dart';
+import 'package:movies/home/home_screen.dart';
 import '../../model/buildTextField.dart';
 import '../../model/language_toggle.dart';
 import 'forgetPassword_screen.dart';
@@ -33,7 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        if (mounted) Navigator.pop(context);
+        if (mounted) {
+           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        }
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -49,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final user = await _authService.signInWithGoogle();
       if (user != null && mounted) {
-        Navigator.pop(context); // or Navigator.pushReplacementNamed to your home route
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       }
     } on AuthException catch (e) {
       if (mounted) {

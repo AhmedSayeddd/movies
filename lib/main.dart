@@ -1,40 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:movies/auth/screens/forgetPassword_screen.dart';
-import 'package:movies/auth/screens/register_screen.dart';
-import 'auth/screens/login_screen.dart';
-import 'splash_screen.dart';
-import 'OnBording/onboarding_screen.dart';
-import 'OnBording/first_onbording.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/cache/cache_helper.dart';
+import 'package:movies/core/network/api_service.dart';
+import 'package:movies/details/movie_details_screen.dart';
+import 'package:movies/home/cubit/movie_cubit.dart';
+import 'package:movies/home/data/datasource/movie_local_data_source.dart';
+import 'package:movies/home/data/datasource/movie_remote_data_source.dart';
+import 'package:movies/home/data/repository/movie_repository.dart';
+import 'package:movies/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const MyApp());
+  await CacheHelper.init();
+  runApp(const MoviesApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class MoviesApp extends StatelessWidget {
+  const MoviesApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Movies App',
-      initialRoute: SplashScreen.routeName,
-      routes: {
-        SplashScreen.routeName: (context) => const SplashScreen(),
-        MovieOnboardingScreen.routeName: (context) => const MovieOnboardingScreen(),
-        OnboardingScreen.routeName: (context) => const OnboardingScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        RegisterScreen.routeName: (context) => const RegisterScreen(),
-        ForgetpasswordScreen.routeName: (context) => const ForgetpasswordScreen(),
-      },
+    return RepositoryProvider(
+      create: (context) => MovieRepository(
+        remoteDataSource: MovieRemoteDataSource(ApiService()),
+        localDataSource: MovieLocalDataSource(),
+      ),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Movies App',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: const Color(0xFF141414),
+          useMaterial3: true,
+        ),
+        initialRoute: HomeScreen.routeName,
+        routes: {
+          HomeScreen.routeName: (context) => BlocProvider(
+                create: (context) => MovieCubit(context.read<MovieRepository>())..fetchMovies(),
+                child: const HomeScreen(),
+              ),
+          MovieDetailsScreen.routeName: (context) => BlocProvider(
+                create: (context) => MovieCubit(context.read<MovieRepository>()),
+                child: const MovieDetailsScreen(),
+              ),
+        },
+      ),
     );
   }
 }

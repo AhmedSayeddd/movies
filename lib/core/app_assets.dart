@@ -8,6 +8,7 @@ class AppAssets {
   static const String poster5 = 'assets/images/1917_.png';
   static const String forgotPassword = 'assets/images/Forgotpassword-bro.png';
   static const String GamerProfile = 'assets/images/gamer1.png';
+  static const String homeBG = 'assets/images/HomeBG.png';
   static const String GamerProfile1 = 'assets/images/gamer2.png';
   static const String GamerProfile2 = 'assets/images/gamer3.png';
   static const String GamerProfile3 = 'assets/images/gamer4.png';
@@ -24,4 +25,11 @@ class AppAssets {
   static const String usa = 'assets/images/US.png';
   static const String route = 'assets/images/route.png';
   static const String identity = 'assets/images/idnentity.png';
+  static const String folder = 'assets/images/Folder.png';
+  static const String watchlist = 'assets/images/watchlist.png';
+  static const String emptyprofile = 'assets/images/Empty.png';
+  static const String favorite = 'assets/images/fav.png';
+  static const String eye = 'assets/images/time.png';
+  static const String star = 'assets/images/star.png';
+  static const String play = 'assets/images/play.png';
 }
